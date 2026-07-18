@@ -757,6 +757,33 @@
     .testi-name { font-size: 0.88rem; font-weight: 700; color: var(--text-dark); }
     .testi-role { font-size: 0.75rem; color: var(--text-light); }
 
+    /* GALLERY */
+    .gallery { background: var(--cream); text-align: center; }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-top: 3rem;
+    }
+    .gallery-item {
+      position: relative;
+      border-radius: 22px;
+      overflow: hidden;
+      aspect-ratio: 3 / 4;
+      box-shadow: var(--shadow-soft);
+    }
+    .gallery-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s cubic-bezier(.2,.7,.2,1);
+    }
+    .gallery-item:hover img { transform: scale(1.06); }
+    @media (max-width: 900px) {
+      .gallery-grid { grid-template-columns: 1fr; gap: 1rem; }
+      .gallery-item { aspect-ratio: 4 / 3; }
+    }
+
     /* CONTACT */
     .contact {
       background: var(--white);
@@ -953,19 +980,7 @@
   </div>
   <div class="hero-visual">
     <div class="hero-bowl">
-      <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <ellipse cx="100" cy="155" rx="72" ry="14" fill="rgba(30,58,6,0.12)"/>
-        <path d="M30 90 Q28 150 100 160 Q172 150 170 90 Q160 60 100 55 Q40 60 30 90Z" fill="#71855b" opacity="0.9"/>
-        <path d="M38 90 Q36 145 100 155 Q164 145 162 90 Q153 65 100 60 Q47 65 38 90Z" fill="#5f7550"/>
-        <ellipse cx="100" cy="88" rx="62" ry="18" fill="#8fa373"/>
-        <ellipse cx="100" cy="88" rx="58" ry="15" fill="#71855b"/>
-        <path d="M80 85 Q95 78 110 85 Q125 92 115 96 Q100 100 85 94 Q73 89 80 85Z" fill="rgba(230,240,210,0.5)" stroke="rgba(230,240,210,0.3)" stroke-width="0.5"/>
-        <path d="M90 82 Q100 79 112 84" stroke="rgba(230,240,210,0.45)" stroke-width="1" stroke-linecap="round"/>
-        <rect x="130" y="30" width="4" height="65" rx="2" fill="#3b4a33" transform="rotate(18, 132, 62)"/>
-        <path d="M128 80 Q130 95 132 100" stroke="#3b4a33" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/>
-        <path d="M133 82 Q134 97 135 102" stroke="#3b4a33" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/>
-        <path d="M138 80 Q138 95 138 100" stroke="#3b4a33" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/>
-      </svg>
+      <img src="images/matcha-3.webp" alt="ماتشا مخفوقة في وعاء" loading="eager" />
     </div>
     <div class="hero-badge">
       <strong data-i18n="hero.badge1val">١٠٠٪</strong>
@@ -999,22 +1014,7 @@
 <!-- ABOUT -->
 <section class="about" id="about">
   <div class="about-img reveal">
-    <svg viewBox="0 0 260 320" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M130 280 L130 140" stroke="#3b4a33" stroke-width="3" stroke-linecap="round"/>
-      <path d="M130 180 Q100 160 80 140" stroke="#3b4a33" stroke-width="2.5" stroke-linecap="round"/>
-      <path d="M130 210 Q165 185 185 160" stroke="#3b4a33" stroke-width="2.5" stroke-linecap="round"/>
-      <path d="M130 160 Q110 130 95 110" stroke="#3b4a33" stroke-width="2" stroke-linecap="round"/>
-      <ellipse cx="75" cy="133" rx="22" ry="12" fill="#8fa373" transform="rotate(-30, 75, 133)"/>
-      <ellipse cx="190" cy="153" rx="24" ry="11" fill="#71855b" transform="rotate(25, 190, 153)"/>
-      <ellipse cx="90" cy="104" rx="20" ry="10" fill="#8fa373" transform="rotate(-45, 90, 104)"/>
-      <ellipse cx="130" cy="135" rx="18" ry="9" fill="#5f7550" transform="rotate(-10, 130, 135)"/>
-      <circle cx="80" cy="120" r="5" fill="#a9bd8a"/>
-      <circle cx="195" cy="140" r="4.5" fill="#a9bd8a"/>
-      <circle cx="96" cy="96" r="4" fill="#c0d4a3"/>
-      <ellipse cx="130" cy="280" rx="40" ry="8" fill="rgba(30,58,6,0.18)"/>
-      <rect x="95" y="268" width="70" height="12" rx="6" fill="#3b4a33"/>
-      <rect x="90" y="278" width="80" height="30" rx="8" fill="#2b3626"/>
-    </svg>
+    <img src="images/matcha-1.webp" alt="أدوات الماتشا" loading="lazy" />
   </div>
   <div class="reveal d1">
     <p class="section-label" data-i18n="about.label">قصتنا</p>
@@ -1139,6 +1139,19 @@
       <h4 data-i18n="proc.s4t">أول شحنة</h4>
       <p data-i18n="proc.s4p">تصلك الماتشا مفرغة الهواء طازجة خلال ٥–٧ أيام عمل من مستودعنا.</p>
     </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <div class="reveal">
+    <p class="section-label" data-i18n="gallery.label">لمحات</p>
+    <h2 class="section-title" data-i18n="gallery.title">من <em>أوجي</em></h2>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item reveal d1"><img src="images/matcha-2.webp" alt="ماتشا" loading="lazy" /></div>
+    <div class="gallery-item reveal d2"><img src="images/matcha-4.webp" alt="ماتشا" loading="lazy" /></div>
+    <div class="gallery-item reveal d3"><img src="images/matcha-5.webp" alt="ماتشا" loading="lazy" /></div>
   </div>
 </section>
 
@@ -1357,6 +1370,8 @@ const translations = {
     "tier3.price": "١٠٥ ر.س / ١٠٠ غ",
     "b2b.note": "تشمل جميع الفئات: شحن مجاني، شهادات جودة، ومدير حساب مخصص. الحد الأدنى للطلبية الأولى: ٥٠٠ غرام.",
     "b2b.sample": "اطلب عينة مجانية",
+    "gallery.label": "لمحات",
+    "gallery.title": "من <em>أوجي</em>",
     "proc.label": "كيف يعمل؟",
     "proc.title": "من المزرعة إلى <em>قائمتك</em>",
     "proc.s1t": "تواصل معنا",
@@ -1502,6 +1517,8 @@ const translations = {
     "tier3.price": "SAR 105 / 100g",
     "b2b.note": "All tiers include free shipping, quality certificates, and a dedicated account manager. Minimum first order: 500g.",
     "b2b.sample": "Request a Sample Pack",
+    "gallery.label": "Gallery",
+    "gallery.title": "Moments from <em>Uji</em>",
     "proc.label": "How It Works",
     "proc.title": "From farm to <em>your menu</em>",
     "proc.s1t": "Enquire",
