@@ -1161,24 +1161,26 @@
 
   <div>
     <p class="section-label" style="margin-bottom:1.25rem;" data-i18n="form.label">أرسل رسالة</p>
-    <form class="form" onsubmit="handleSubmit(event)">
+    <form class="form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handleSubmit(event)">
+      <input type="hidden" name="form-name" value="contact" />
+      <p style="display:none;"><label>Don't fill this out: <input name="bot-field" /></label></p>
       <div class="form-row">
         <div class="form-group">
           <label for="fname" data-i18n="form.fname">الاسم الأول</label>
-          <input type="text" id="fname" data-i18n-ph="form.fname.ph" placeholder="يوكي" required />
+          <input type="text" id="fname" name="firstName" data-i18n-ph="form.fname.ph" placeholder="يوكي" required />
         </div>
         <div class="form-group">
           <label for="lname" data-i18n="form.lname">اسم العائلة</label>
-          <input type="text" id="lname" data-i18n-ph="form.lname.ph" placeholder="تاناكا" required />
+          <input type="text" id="lname" name="lastName" data-i18n-ph="form.lname.ph" placeholder="تاناكا" required />
         </div>
       </div>
       <div class="form-group">
         <label for="email" data-i18n="form.email">البريد الإلكتروني</label>
-        <input type="email" id="email" placeholder="you@example.com" required />
+        <input type="email" id="email" name="email" placeholder="you@example.com" required />
       </div>
       <div class="form-group">
         <label for="inquiry" data-i18n="form.type">نوع الاستفسار</label>
-        <select id="inquiry">
+        <select id="inquiry" name="inquiryType">
           <option value="" data-i18n="form.sel">اختر…</option>
           <option value="general" data-i18n="form.opt1">استفسار عام</option>
           <option value="wholesale" data-i18n="form.opt2">الجملة / B2B</option>
@@ -1188,7 +1190,7 @@
       </div>
       <div class="form-group">
         <label for="msg" data-i18n="form.msg">الرسالة</label>
-        <textarea id="msg" data-i18n-ph="form.msg.ph" placeholder="أخبرنا بما تحتاج…" required></textarea>
+        <textarea id="msg" name="message" data-i18n-ph="form.msg.ph" placeholder="أخبرنا بما تحتاج…" required></textarea>
       </div>
       <button type="submit" class="form-submit" id="inquirySubmitBtn" data-i18n="form.send">إرسال الرسالة ←</button>
       <p id="form-success" style="display:none;color:var(--green-600);font-size:0.9rem;text-align:center;padding:0.5rem;" data-i18n="form.ok">✓ تم الإرسال! سنتواصل معك خلال ٢٤ ساعة.</p>
@@ -1575,13 +1577,15 @@ function filterMenu(cat, btn) {
   });
 }
 
-// Inquiry form — delivers to suliman.khaled12@gmail.com via FormSubmit (no server, no key).
-// FIRST submission triggers a one-time confirmation email to that inbox — click the link
-// once, and every submission after that lands directly in the inbox.
-const CONTACT_EMAIL = 'suliman.khaled12@gmail.com';
-
+// Inquiry form — handled by NETLIFY FORMS (built into the host, no third party).
+// Submissions appear in your Netlify dashboard (Forms tab). To get them emailed to you
+// — and to CHANGE the destination email anytime — go to:
+//   Netlify → your site → Forms → Settings & usage → Form notifications →
+//   Add notification → Email notification → enter the email → Save.
+// No code change needed to switch the email in the future.
 async function handleSubmit(e) {
   e.preventDefault();
+  const form = e.target;
   const btn = document.getElementById('inquirySubmitBtn');
   const ok  = document.getElementById('form-success');
   const err = document.getElementById('form-error');
@@ -1590,29 +1594,18 @@ async function handleSubmit(e) {
   btn.disabled = true;
   btn.textContent = currentLang === 'ar' ? 'جاري الإرسال…' : 'Sending…';
 
-  const firstName = document.getElementById('fname').value.trim();
-  const lastName  = document.getElementById('lname').value.trim();
-  const fromEmail = document.getElementById('email').value.trim();
-  const type      = document.getElementById('inquiry').value;
-  const message   = document.getElementById('msg').value.trim();
+  // Encode all named fields (Netlify needs application/x-www-form-urlencoded + form-name)
+  const data = new FormData(form);
+  const body = new URLSearchParams(data).toString();
 
   try {
-    const res = await fetch('https://formsubmit.co/ajax/' + encodeURIComponent(CONTACT_EMAIL), {
+    const res = await fetch('/', {
       method: 'POST',
-      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        _subject: `New enquiry from ${firstName} ${lastName} — Uji`,
-        _template: 'table',
-        _replyto: fromEmail,        // hit Reply to answer the customer directly
-        Name: `${firstName} ${lastName}`.trim(),
-        Email: fromEmail,
-        "Inquiry Type": type,
-        Message: message
-      })
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body
     });
-    const data = await res.json();
-    if (data.success === 'false' || data.success === false) throw new Error('send error');
-    e.target.reset();
+    if (!res.ok) throw new Error('send error');
+    form.reset();
     ok.style.display = 'block';
     setTimeout(() => ok.style.display = 'none', 6000);
   } catch {
