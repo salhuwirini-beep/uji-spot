@@ -36,6 +36,24 @@
     }
 
     html { scroll-behavior: smooth; }
+    section[id], [id="contact-form"], [id="home"] { scroll-margin-top: 90px; }
+
+    /* ── SCROLL REVEAL (pop-up on scroll) ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(38px);
+      transition: opacity 0.8s cubic-bezier(.2,.7,.2,1),
+                  transform 0.8s cubic-bezier(.2,.7,.2,1);
+      will-change: opacity, transform;
+    }
+    .reveal.in { opacity: 1; transform: none; }
+    .reveal.d1 { transition-delay: 0.08s; }
+    .reveal.d2 { transition-delay: 0.16s; }
+    .reveal.d3 { transition-delay: 0.24s; }
+    .reveal.d4 { transition-delay: 0.32s; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1 !important; transform: none !important; transition: none; }
+    }
 
     body {
       font-family: var(--font-ar);
@@ -297,6 +315,8 @@
     }
 
     .hero-bowl svg { width: 220px; height: 220px; }
+    .hero-bowl { overflow: hidden; }
+    .hero-bowl img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
     .hero-badge {
       position: absolute;
@@ -429,6 +449,7 @@
     }
 
     .about-img svg { width: 260px; opacity: 0.85; }
+    .about-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
     .about-stats {
       display: grid;
@@ -897,7 +918,7 @@
     <li><a href="#about" data-i18n="nav.story">قصتنا</a></li>
     <li><a href="#b2b" data-i18n="nav.wholesale">الجملة</a></li>
     <li><a href="#contact" data-i18n="nav.visit">زورونا</a></li>
-    <li><a href="#contact" class="nav-cta" data-i18n="nav.order">تواصل معنا</a></li>
+    <li><a href="#contact-form" class="nav-cta" data-i18n="nav.order">تواصل معنا</a></li>
   </ul>
   <div style="display:flex;align-items:center;gap:0.75rem;">
     <div class="lang-toggle">
@@ -926,7 +947,7 @@
     <h1 data-i18n="hero.h1">كل رشفة<br>لحظة <em>مميزة</em></h1>
     <p data-i18n="hero.p">ماتشا فاخرة وقهوة مختارة وحلويات يدوية الصنع — بدأت رحلتنا بحثاً عن أجود ماتشا، وانتهت بفنجان نفخر به كل يوم.</p>
     <div class="hero-btns">
-      <a href="#contact" class="btn-primary" data-i18n="hero.btn1">تواصل معنا</a>
+      <a href="#contact-form" class="btn-primary" data-i18n="hero.btn1">تواصل معنا</a>
       <a href="#b2b" class="btn-outline" data-i18n="hero.btn2">بيع الجملة</a>
     </div>
   </div>
@@ -934,16 +955,16 @@
     <div class="hero-bowl">
       <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
         <ellipse cx="100" cy="155" rx="72" ry="14" fill="rgba(30,58,6,0.12)"/>
-        <path d="M30 90 Q28 150 100 160 Q172 150 170 90 Q160 60 100 55 Q40 60 30 90Z" fill="#4a7a18" opacity="0.9"/>
-        <path d="M38 90 Q36 145 100 155 Q164 145 162 90 Q153 65 100 60 Q47 65 38 90Z" fill="#3B6D11"/>
-        <ellipse cx="100" cy="88" rx="62" ry="18" fill="#639922"/>
-        <ellipse cx="100" cy="88" rx="58" ry="15" fill="#4a7a18"/>
-        <path d="M80 85 Q95 78 110 85 Q125 92 115 96 Q100 100 85 94 Q73 89 80 85Z" fill="rgba(200,230,150,0.45)" stroke="rgba(200,230,150,0.3)" stroke-width="0.5"/>
-        <path d="M90 82 Q100 79 112 84" stroke="rgba(200,230,150,0.4)" stroke-width="1" stroke-linecap="round"/>
-        <rect x="130" y="30" width="4" height="65" rx="2" fill="#27500A" transform="rotate(18, 132, 62)"/>
-        <path d="M128 80 Q130 95 132 100" stroke="#1e3a06" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/>
-        <path d="M133 82 Q134 97 135 102" stroke="#1e3a06" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/>
-        <path d="M138 80 Q138 95 138 100" stroke="#1e3a06" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/>
+        <path d="M30 90 Q28 150 100 160 Q172 150 170 90 Q160 60 100 55 Q40 60 30 90Z" fill="#71855b" opacity="0.9"/>
+        <path d="M38 90 Q36 145 100 155 Q164 145 162 90 Q153 65 100 60 Q47 65 38 90Z" fill="#5f7550"/>
+        <ellipse cx="100" cy="88" rx="62" ry="18" fill="#8fa373"/>
+        <ellipse cx="100" cy="88" rx="58" ry="15" fill="#71855b"/>
+        <path d="M80 85 Q95 78 110 85 Q125 92 115 96 Q100 100 85 94 Q73 89 80 85Z" fill="rgba(230,240,210,0.5)" stroke="rgba(230,240,210,0.3)" stroke-width="0.5"/>
+        <path d="M90 82 Q100 79 112 84" stroke="rgba(230,240,210,0.45)" stroke-width="1" stroke-linecap="round"/>
+        <rect x="130" y="30" width="4" height="65" rx="2" fill="#3b4a33" transform="rotate(18, 132, 62)"/>
+        <path d="M128 80 Q130 95 132 100" stroke="#3b4a33" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/>
+        <path d="M133 82 Q134 97 135 102" stroke="#3b4a33" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/>
+        <path d="M138 80 Q138 95 138 100" stroke="#3b4a33" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/>
       </svg>
     </div>
     <div class="hero-badge">
@@ -977,25 +998,25 @@
 
 <!-- ABOUT -->
 <section class="about" id="about">
-  <div class="about-img">
+  <div class="about-img reveal">
     <svg viewBox="0 0 260 320" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M130 280 L130 140" stroke="#27500A" stroke-width="3" stroke-linecap="round"/>
-      <path d="M130 180 Q100 160 80 140" stroke="#27500A" stroke-width="2.5" stroke-linecap="round"/>
-      <path d="M130 210 Q165 185 185 160" stroke="#27500A" stroke-width="2.5" stroke-linecap="round"/>
-      <path d="M130 160 Q110 130 95 110" stroke="#27500A" stroke-width="2" stroke-linecap="round"/>
-      <ellipse cx="75" cy="133" rx="22" ry="12" fill="#639922" transform="rotate(-30, 75, 133)"/>
-      <ellipse cx="190" cy="153" rx="24" ry="11" fill="#4a7a18" transform="rotate(25, 190, 153)"/>
-      <ellipse cx="90" cy="104" rx="20" ry="10" fill="#639922" transform="rotate(-45, 90, 104)"/>
-      <ellipse cx="130" cy="135" rx="18" ry="9" fill="#3B6D11" transform="rotate(-10, 130, 135)"/>
-      <circle cx="80" cy="120" r="5" fill="#97C459"/>
-      <circle cx="195" cy="140" r="4.5" fill="#97C459"/>
-      <circle cx="96" cy="96" r="4" fill="#C0DD97"/>
+      <path d="M130 280 L130 140" stroke="#3b4a33" stroke-width="3" stroke-linecap="round"/>
+      <path d="M130 180 Q100 160 80 140" stroke="#3b4a33" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M130 210 Q165 185 185 160" stroke="#3b4a33" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M130 160 Q110 130 95 110" stroke="#3b4a33" stroke-width="2" stroke-linecap="round"/>
+      <ellipse cx="75" cy="133" rx="22" ry="12" fill="#8fa373" transform="rotate(-30, 75, 133)"/>
+      <ellipse cx="190" cy="153" rx="24" ry="11" fill="#71855b" transform="rotate(25, 190, 153)"/>
+      <ellipse cx="90" cy="104" rx="20" ry="10" fill="#8fa373" transform="rotate(-45, 90, 104)"/>
+      <ellipse cx="130" cy="135" rx="18" ry="9" fill="#5f7550" transform="rotate(-10, 130, 135)"/>
+      <circle cx="80" cy="120" r="5" fill="#a9bd8a"/>
+      <circle cx="195" cy="140" r="4.5" fill="#a9bd8a"/>
+      <circle cx="96" cy="96" r="4" fill="#c0d4a3"/>
       <ellipse cx="130" cy="280" rx="40" ry="8" fill="rgba(30,58,6,0.18)"/>
-      <rect x="95" y="268" width="70" height="12" rx="6" fill="#27500A"/>
-      <rect x="90" y="278" width="80" height="30" rx="8" fill="#1e3a06"/>
+      <rect x="95" y="268" width="70" height="12" rx="6" fill="#3b4a33"/>
+      <rect x="90" y="278" width="80" height="30" rx="8" fill="#2b3626"/>
     </svg>
   </div>
-  <div>
+  <div class="reveal d1">
     <p class="section-label" data-i18n="about.label">قصتنا</p>
     <h2 class="section-title" data-i18n="about.title">من <em>شغف</em> إلى فنجان</h2>
     <p class="section-sub" data-i18n="about.sub">بدأت أوجي من فكرة بسيطة: العثور على ماتشا تستحق حقاً. جرّبنا عشرات الأنواع، وتذوقنا الكثير من الأكواب المخيبة، حتى وصلنا إلى النكهة التي كنا نبحث عنها. من مطبخ صغير وشغف كبير، بنينا أوجي خطوة بخطوة — ماتشا نفخر بها وقهوة نحضّرها بحب لكل من يزورنا.</p>
@@ -1023,7 +1044,7 @@
 <!-- B2B -->
 <section class="b2b" id="b2b">
   <div class="b2b-inner">
-    <div>
+    <div class="reveal">
       <p class="section-label" data-i18n="b2b.label">للشركات والمطاعم</p>
       <h2 class="section-title" data-i18n="b2b.title">توريد ماتشا <em>بالجملة</em></h2>
       <p class="section-sub" data-i18n="b2b.sub">كن شريكاً لأوجي سبوت وأحضر الماتشا الاحتفالية الأصيلة إلى مطعمك أو مقهاك أو رفوف متجرك. نتولى الاستيراد مباشرةً من مصادرنا المختارة حفاظاً على الجودة.</p>
@@ -1060,7 +1081,7 @@
       <a href="#contact" class="btn-primary" style="display:inline-block; margin-top:0.5rem;" data-i18n="b2b.cta2">تواصل معنا</a>
     </div>
 
-    <div class="b2b-card">
+    <div class="b2b-card reveal d1">
       <h3 data-i18n="b2b.pricing">أسعار الجملة</h3>
       <div class="b2b-tiers">
         <div class="tier">
@@ -1093,27 +1114,27 @@
 
 <!-- PROCESS -->
 <section class="process" id="process">
-  <div style="text-align:center;">
+  <div style="text-align:center;" class="reveal">
     <p class="section-label" data-i18n="proc.label">كيف يعمل؟</p>
     <h2 class="section-title" data-i18n="proc.title">من المزرعة إلى <em>قائمتك</em></h2>
   </div>
   <div class="process-grid">
-    <div class="process-step">
+    <div class="process-step reveal d1">
       <div class="process-num">١</div>
       <h4 data-i18n="proc.s1t">تواصل معنا</h4>
       <p data-i18n="proc.s1p">أرسل نموذج B2B مع نوع نشاطك وكميتك الشهرية المتوقعة.</p>
     </div>
-    <div class="process-step">
+    <div class="process-step reveal d2">
       <div class="process-num">٢</div>
       <h4 data-i18n="proc.s2t">عينة مجانية</h4>
       <p data-i18n="proc.s2p">نرسل لك مجموعة عينات بثلاث درجات من الماتشا لتجربتها.</p>
     </div>
-    <div class="process-step">
+    <div class="process-step reveal d3">
       <div class="process-num">٣</div>
       <h4 data-i18n="proc.s3t">اتفاق الشروط</h4>
       <p data-i18n="proc.s3p">اختر الفئة والتغليف وجدول التسليم، ونحن نتكفل بالباقي.</p>
     </div>
-    <div class="process-step">
+    <div class="process-step reveal d4">
       <div class="process-num">٤</div>
       <h4 data-i18n="proc.s4t">أول شحنة</h4>
       <p data-i18n="proc.s4p">تصلك الماتشا مفرغة الهواء طازجة خلال ٥–٧ أيام عمل من مستودعنا.</p>
@@ -1123,7 +1144,7 @@
 
 <!-- CONTACT -->
 <section class="contact" id="contact">
-  <div>
+  <div class="reveal">
     <p class="section-label" data-i18n="contact.label">تواصل معنا</p>
     <h2 class="section-title" data-i18n="contact.title">زورونا أو <em>راسلونا</em></h2>
     <p class="section-sub" data-i18n="contact.sub">سواء كنت تمر لتحتسي كوباً أو تستفسر عن برنامج الجملة، يسعدنا التواصل معك.</p>
@@ -1159,7 +1180,7 @@
     </div>
   </div>
 
-  <div>
+  <div id="contact-form" class="reveal d1">
     <p class="section-label" style="margin-bottom:1.25rem;" data-i18n="form.label">أرسل رسالة</p>
     <form class="form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handleSubmit(event)">
       <input type="hidden" name="form-name" value="contact" />
@@ -1167,11 +1188,11 @@
       <div class="form-row">
         <div class="form-group">
           <label for="fname" data-i18n="form.fname">الاسم الأول</label>
-          <input type="text" id="fname" name="firstName" data-i18n-ph="form.fname.ph" placeholder="يوكي" required />
+          <input type="text" id="fname" name="firstName" data-i18n-ph="form.fname.ph" placeholder="سلطان" required />
         </div>
         <div class="form-group">
           <label for="lname" data-i18n="form.lname">اسم العائلة</label>
-          <input type="text" id="lname" name="lastName" data-i18n-ph="form.lname.ph" placeholder="تاناكا" required />
+          <input type="text" id="lname" name="lastName" data-i18n-ph="form.lname.ph" placeholder="الماتشا" required />
         </div>
       </div>
       <div class="form-group">
@@ -1362,8 +1383,8 @@ const translations = {
     "ci3t": "البريد الإلكتروني",
     "ci4t": "الهاتف",
     "form.label": "أرسل رسالة",
-    "form.fname": "الاسم الأول", "form.fname.ph": "يوكي",
-    "form.lname": "اسم العائلة", "form.lname.ph": "تاناكا",
+    "form.fname": "الاسم الأول", "form.fname.ph": "سلطان",
+    "form.lname": "اسم العائلة", "form.lname.ph": "الماتشا",
     "form.email": "البريد الإلكتروني",
     "form.type": "نوع الاستفسار",
     "form.sel": "اختر…",
@@ -1507,8 +1528,8 @@ const translations = {
     "ci3t": "Email",
     "ci4t": "Phone",
     "form.label": "Send a Message",
-    "form.fname": "First Name", "form.fname.ph": "Yuki",
-    "form.lname": "Last Name", "form.lname.ph": "Tanaka",
+    "form.fname": "First Name", "form.fname.ph": "Sultan",
+    "form.lname": "Last Name", "form.lname.ph": "Almatcha",
     "form.email": "Email",
     "form.type": "Inquiry Type",
     "form.sel": "Select…",
@@ -1561,6 +1582,24 @@ const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
   navbar.classList.toggle('scrolled', window.scrollY > 40);
 });
+
+// Scroll-reveal — elements pop up as they enter the viewport.
+// Scroll-based (works in every browser). Failsafe below guarantees content is never
+// left hidden even if something goes wrong.
+function revealOnScroll() {
+  const trigger = window.innerHeight * 0.88;
+  document.querySelectorAll('.reveal:not(.in)').forEach(el => {
+    if (el.getBoundingClientRect().top < trigger) el.classList.add('in');
+  });
+}
+window.addEventListener('scroll', revealOnScroll, { passive: true });
+window.addEventListener('resize', revealOnScroll, { passive: true });
+window.addEventListener('load', revealOnScroll);
+revealOnScroll();
+// Failsafe: never let a .reveal stay invisible (e.g. if scroll events never fire)
+setTimeout(() => document.querySelectorAll('.reveal:not(.in)').forEach(el => {
+  if (el.getBoundingClientRect().top < window.innerHeight * 1.5) el.classList.add('in');
+}), 2500);
 
 // Hamburger
 const hamburger = document.getElementById('hamburger');
