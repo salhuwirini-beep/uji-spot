@@ -169,25 +169,19 @@
     .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
     .hamburger span { display: block; width: 22px; height: 2px; background: var(--green-700); border-radius: 2px; }
 
-    /* HERO — brand sage panel, centered */
+    /* HERO — brand sage panel */
     .hero {
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 9rem 2rem 7rem;
-      gap: 2.5rem;
+      padding: 9rem 4rem 6rem;
+      gap: 2rem;
       position: relative;
       overflow: hidden;
       background: var(--green-600);
       border-radius: 0 0 48px 48px;
     }
-    .hero-visual { order: -1; }         /* image sits above the text */
-    .hero-text { max-width: 680px; }
-    .hero-text p { margin-inline: auto; }
-    .hero-btns { justify-content: center; }
 
     html[dir="rtl"] .hero { direction: rtl; }
 
@@ -224,7 +218,7 @@
       margin-bottom: 1.5rem;
     }
 
-    html[dir="rtl"] .hero-text h1 { text-align: center; }
+    html[dir="rtl"] .hero-text h1 { text-align: right; }
 
     html[lang="en"] .hero-text h1 {
       font-family: var(--font-serif);
@@ -305,7 +299,7 @@
       position: relative;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;  /* pull image toward the center */
     }
 
     .hero-bowl {
